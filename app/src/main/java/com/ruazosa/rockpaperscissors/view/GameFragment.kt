@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import com.ruazosa.rockpaperscissors.R
 import com.ruazosa.rockpaperscissors.utils.Utils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.gamestart_popup.*
 import kotlinx.android.synthetic.main.gamestart_popup.view.*
@@ -37,16 +40,19 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.gamestart_popup, null)
-        alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.apply {
-            setCancelable(false)
-            setView(dialogView)
-        }
+        if (Utils.firstPlay){
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.gamestart_popup, null)
+            alertDialogBuilder = AlertDialog.Builder(context)
+            alertDialogBuilder.apply {
+                setCancelable(false)
+                setView(dialogView)
+            }
 
-        val alertDialog = alertDialogBuilder.create()
-        dialogView.gotItButton.setOnClickListener { alertDialog.dismiss() }
-        alertDialog.show()
+            val alertDialog = alertDialogBuilder.create()
+            dialogView.gotItButton.setOnClickListener { alertDialog.dismiss() }
+            alertDialog.show()
+            Utils.firstPlay = false
+        }
 
         rockCardView.setOnClickListener { roundHandler(it.id) }
         paperCardView.setOnClickListener { roundHandler(it.id) }
@@ -78,8 +84,10 @@ class GameFragment : Fragment() {
             }
         }
 
-        if(playerScore == 3 || cpuScore == 3){
-            // Todo: handle game over
+        if(playerScore == 5 || cpuScore == 5){
+            val result = if(playerScore==5) 1 else -1
+            val action = GameFragmentDirections.gameOverDirection(result)
+            fragment.view?.let { Navigation.findNavController(it).navigate(action) }
         }
 
         if (!gameStarted){

@@ -22,5 +22,22 @@
         <action
             android:id="@+id/gameToStartDirection"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/gameOverDirection"
+            app:destination="@id/playAgainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playAgainFragment"
+        android:name="com.ruazosa.rockpaperscissors.view.PlayAgainFragment"
+        android:label="fragment_play_again"
+        tools:layout="@layout/fragment_play_again" >
+        <action
+            android:id="@+id/playAgainDirection"
+            app:destination="@id/gameFragment" />
+
+        <argument
+            android:name="gameResult"
+            app:argType="integer" />
+
     </fragment>
 </navigation>

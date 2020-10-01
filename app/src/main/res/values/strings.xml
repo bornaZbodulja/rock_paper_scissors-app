@@ -8,7 +8,10 @@
     <string name="rock">Rock</string>
     <string name="paper">Paper</string>
     <string name="scissors">Scissors</string>
-    <string name="game_description_detail">Welcome to Rock, Paper, Scissors! You will be playing agains a computer. The first who gets to three wins
-    the game. Good luck!</string>
+    <string name="game_description_detail">Welcome to Rock, Paper, Scissors! You will be playing agains a computer. The first who gets to five wins
+    the game.\n Good luck!</string>
     <string name="got_it">Got It!</string>
+    <string name="game_won">You won! \n Congratulations!</string>
+    <string name="game_lost">You lost! \n Better luck next time!</string>
+    <string name="play_again">Play again</string>
 </resources>
